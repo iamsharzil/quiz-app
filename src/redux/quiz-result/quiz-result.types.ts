@@ -1,0 +1,8 @@
+const QuizActionTypes = {
+  SELCTED_ANSWER: 'SELCTED_ANSWER',
+  CURRENT_QUESTION: 'CURRENT_QUESTION',
+  QUIZ_SUMMARY: 'QUIZ_SUMMARY',
+  INITIAL_STATE: 'INITIAL_STATE',
+};
+
+export default QuizActionTypes;

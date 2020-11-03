@@ -1,0 +1,39 @@
+import { useEffect, useState } from 'react';
+
+import { apiClient } from '../config/apiClient';
+import { BACKEND_URL } from '../config/config';
+
+const useFetch = (url: string, method: 'GET' | 'POST') => {
+  const [result, setResult] = useState();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    const fetchQuiz = async () => {
+      setLoading(true);
+
+      if (BACKEND_URL) {
+        try {
+          const res = await apiClient({ url, method });
+          const data = await res.data;
+          setLoading(false);
+          setResult(data);
+          return data;
+        } catch (e) {
+          setLoading(false);
+          setError(e.response);
+        }
+      }
+    };
+
+    fetchQuiz();
+  }, [url, method]);
+
+  return {
+    result,
+    error,
+    loading,
+  };
+};
+
+export default useFetch;
